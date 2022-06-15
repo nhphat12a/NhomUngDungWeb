@@ -1,0 +1,79 @@
+﻿@model IEnumerable<QLPKPV.Context.Brand>
+
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Areas/Admin/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Quản lý thương hiệu</h2>
+
+<p>
+    @Html.ActionLink("Tạo thương hiệu mới", "Create")
+</p>
+<table class="table">
+    <tr>
+        <th>
+            Tên thương hiệu
+        </th>
+        <th>
+            Hình ảnh
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Slug)
+        </th>
+        <th>
+            Hiển thị trang chủ
+        </th>
+        <th>
+            Thứ tự hiển thị
+        </th>
+        <th>
+            Thời gian tạo
+        </th>
+        <th>
+            Thời gian cập nhập
+        </th>
+        <th>
+            Đã xóa
+        </th>
+        <th>
+            Chức năng
+        </th>
+    </tr>
+
+@foreach (var item in Model) {
+<tr>
+    <td>
+        @Html.DisplayFor(modelItem => item.Name)
+    </td>
+    <td>
+        @Html.DisplayFor(modelItem => item.Avatar)
+    </td>
+    <td>
+        @Html.DisplayFor(modelItem => item.Slug)
+    </td>
+    <td>
+        @Html.DisplayFor(modelItem => item.ShowOnHomePage)
+    </td>
+    <td>
+        @Html.DisplayFor(modelItem => item.DisplayOrder)
+    </td>
+    <td>
+        @Html.DisplayFor(modelItem => item.CreatedOnUtc)
+    </td>
+    <td>
+        @Html.DisplayFor(modelItem => item.UpdateOnUtc)
+    </td>
+    <td>
+        @Html.DisplayFor(modelItem => item.Deleted)
+    </td>
+    
+    <td>
+        @Html.ActionLink(" ", "Edit", new { id = item.Id }, new { @class = "fa fa-pen-square" }) 
+        @Html.ActionLink(" ", "Details", new { id = item.Id }, new { @class = "fa fa-info" }) 
+        @Html.ActionLink(" ", "Delete", new { id = item.Id }, new { @class = "fa fa-trash" })
+    </td>
+</tr>
+}
+
+</table>

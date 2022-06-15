@@ -1,0 +1,115 @@
+﻿@using PagedList;
+@using PagedList.Mvc;
+@model PagedList.IPagedList<QLPKPV.Context.Category>
+
+
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Areas/Admin/Views/Shared/_Layout.cshtml";
+}
+<style>
+    h2, p {
+        text-align: center
+    }
+
+    .cotaniner-item {
+        margin-left: 2rem;
+    }
+</style>
+<div class="cotaniner-item">
+    <h2>Quản lý danh mục</h2>
+
+    @using (Html.BeginForm("Index", "Categories", FormMethod.Get))
+    {
+        <p>
+            Tìm kiếm sản phẩm : @Html.TextBox("SearchString", ViewBag.CurrentFilter as string, new { @placeholder = "Nhập tên sản phẩm..." })
+            <input type="submit" class="btn btn-primary" value="Tim kiem" />
+        </p>
+    }
+   
+    <p>
+        @Html.ActionLink("Thêm Danh mục", "Create")
+    </p>
+    <table class="table">
+        <tr>
+            <th>
+                Tên danh mục
+            </th>
+            <th>
+                Ảnh danh mục
+            </th>
+            <th>
+                Loai
+            </th>
+            <th>
+                Hiển thị trang chủ
+            </th>
+            <th>
+                Thứ tự hiển thị
+            </th>
+            <th>
+                Thời gian tạo
+            </th>
+            <th>
+                Thời gian cập nhập
+            </th>
+            <th>
+                Chức năng
+            </th>
+
+        </tr>
+
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Name)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Avatar)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Slug)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.ShowOnHomePage)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.DisplayOrder)
+                </td>
+
+                <td>
+                    @Html.DisplayFor(modelItem => item.CreatedOnUtc)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.UpdateOnUtc)
+                </td>
+                <td>
+                    @Html.ActionLink(" ", "Edit", new { id = item.Id }, new { @class = "fa fa-pen-square" })
+                    @Html.ActionLink(" ", "Details", new { id = item.Id }, new { @class = "fa fa-info" })
+                    @Html.ActionLink(" ", "Delete", new { id = item.Id }, new { @class = "fa fa-trash" })
+                </td>
+            </tr>
+        }
+
+    </table>
+    Trang @(Model.PageCount<Model.PageNumber ? 0 :Model.PageNumber) of @Model.PageCount
+    @Html.PagedListPager(Model, page => Url.Action("Index",
+        new { page, currentFilter = ViewBag.CurrentFilter }))
+</div>
+<style>
+    .pagination {
+        display: flex;
+        justify-content: center;
+        align-content: center;
+    }
+
+        .pagination li a {
+            padding: 8px 12px;
+            border: 1px solid #ccc;
+        }
+
+            .pagination li a:hover {
+                background: #00ff21;
+            }
+</style>

@@ -1,0 +1,198 @@
+﻿<!DOCTYPE HTML>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="pragma" content="no-cache" />
+    <meta http-equiv="cache-control" content="max-age=604800" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <title>Phong Vũ</title>
+
+    <link href="~/Content/images/favicon.ico" rel="shortcut icon" type="image/x-icon">
+
+    <!-- jQuery -->
+    <script src="~/Scripts/js/jquery-2.0.0.min.js" type="text/javascript"></script>
+
+    <!-- Bootstrap4 files-->
+    <script src="~/Scripts/js/bootstrap.bundle.min.js" type="text/javascript"></script>
+    <link href="~/Content/css/bootstrap.css" rel="stylesheet" type="text/css" />
+
+    <!-- Font awesome 5 -->
+    <link href="~/Content/fonts/fontawesome/~/Content/all.min.css" type="text/css" rel="stylesheet">
+    <link href="~/Content/fonts/fontawesome/css/all.min.css" rel="stylesheet" />
+    <!-- custom style -->
+    <link href="~/Content/css/ui.css" rel="stylesheet" type="text/css" />
+    <link href="~/Content/css/responsive.css" rel="stylesheet" type="text/css" />
+
+    <!-- custom javascript -->
+    <script src="~/Scripts/js/script.js" type="text/javascript"></script>
+
+    <script src="~/Scripts/js/main.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+</head>
+<body>
+
+    <header class="section-header">
+        <section class="header-main border-bottom">
+            <div class="container">
+                <div class="row align-items-center">
+                    <div class="col-xl-2 col-lg-3 col-md-12">
+                        <a href="@Url.Action("Index","Home",new { }) ">
+                            <img class="logo" src="~/Content/images/logo-full.svg">
+                        </a> <!-- brand-wrap.// -->
+                    </div>
+                    <div class="col-xl-6 col-lg-5 col-md-6">
+                        @using (Html.BeginForm("TimKiem", "Home", FormMethod.Get))
+                        {
+                            <p>
+                                @Html.TextBox("SearchString", ViewBag.CurrentFilter as string, new { @placeholder = "Nhập tên sản phẩm...",@style="width:85%"})
+                                 <input type="submit" class="btn btn-primary" value="Tìm Kiếm" />
+                            </p>
+                        }
+                    </div> <!-- col.// -->
+                    <div class="col-xl-4 col-lg-4 col-md-6">
+                        <div class="widgets-wrap float-md-right">
+                            <div class="widget-header mr-3">
+                                <a href="#" class="widget-view">
+
+                                    @if (Session["Email"] == "admin@gmail.com")
+                                    {
+                        <a href="/Admin/Product/Index"> Trang Admin</a>}
+                                    @if (Session["idUser"] != null)
+                                    {
+                        <a href="/Admin/Product/Index"> Trang Admin</a>
+                                        <a href="~/Home/Logout">Logout</a> }
+                                    else
+                                    {
+                        
+                                <a href="~/Home/Login" class="widget-view">
+                                    <div class="icon-area">
+                                        @*<i class="fa fa-store"></i>*@
+                                        <i class="fa fa-user"></i>
+                                    </div>
+                                    <small class="text"> Đăng Nhập </small>
+                                </a>
+                        }
+
+
+                                </a>
+                            </div>
+
+                            <div class="widget-header mr-3">
+                                @*<a href="#" class="widget-view">
+                                    <div class="icon-area">
+                                        <i class="fa fa-store"></i>
+                                    </div>
+                                    <small class="text"> Orders </small>
+                                </a>*@
+                            </div>
+                            <div class="widget-header">
+                                <a href="@Url.Action("Index","Cart")" class="widget-view">
+                                    <div class="icon-area">
+                                        <i class="fa fa-shopping-cart">
+                                            <span class="notify" id="CartCount">
+                                             @if (Session["count"]!=null)
+                                             {
+                                                 @Session["count"]
+                                                }
+                                             else
+            {
+                <span>0</span>
+            }
+
+
+
+                                            </span>
+                                        </i>
+                                    </div>
+                                    <small class="text"> Giỏ Hàng </small>
+                                </a>
+                            </div>
+                        </div> <!-- widgets-wrap.// -->
+                    </div> <!-- col.// -->
+                </div> <!-- row.// -->
+            </div> <!-- container.// -->
+        </section> <!-- header-main .// -->
+
+
+        
+    </header> <!-- section-header.// -->
+    <!-- Render body -->
+    @RenderBody()
+
+    <footer class="section-footer bg-secondary">
+        <div class="container">
+            <section class="footer-top padding-y-lg text-white">
+                <div class="row">
+                    <aside class="col-md col-6">
+                        <h6 class="title">Hỗ Trợ Bảo Hành</h6>
+                        <ul class="list-unstyled">
+                            <li> <a href="#">Thẻ Ưu Đãi</a></li>
+                            <li> <a href="#">Trung Tâm Bảo Hành</a></li>
+                            <li> <a href="#">Thanh Toán Và Giao Hàng</a></li>
+                            <li> <a href="#">Dịch Vụ Sửa Chữ Và Bảo Trì</a></li>
+                            <li> <a href="#">Doanh Nghiệp Thân Thiết</a></li>
+                        </ul>
+                    </aside>
+                    <aside class="col-md col-6">
+                        <h6 class="title">Chính Sách Mua Hàng Và Bảo Hành</h6>
+                        <ul class="list-unstyled">
+                            <li> <a href="#">Quy Định Chung</a></li>
+                            <li> <a href="#">Chính Sách Bảo Mật Và Thông Tin</a></li>
+                            <li> <a href="#">Chính Sách Vận Chuyển Và Lắp Đặt</a></li>
+                            <li> <a href="#">Chính Sách Bảo Hành</a></li>
+                            <li> <a href="#">Chính Sách Đổi Trả Và Hoàn Tiền</a></li>
+                            <li><a href="#">Quy Định Giá Cả Và Hình Thức Thanh Toán </a></li>
+                            <li><a href="#">Chính Sách Trả Góp</a></li>
+                        </ul>
+                    </aside>
+                    <aside class="col-md col-6">
+                        <h6 class="title">Thông Tin Phong Vũ</h6>
+                        <ul class="list-unstyled">
+                            <li> <a href="#">Giới Thiệu Phong Vũ</a></li>
+                            <li> <a href="#">Thông Tin Liên Hệ</a></li>
+                            <li> <a href="#">Hệ Thống Showroom</a></li>
+                            <li> <a href="#">Hỏi Đáp</a></li>
+                            <li> <a href="#">Tin Công Nghệ</a></li>
+                            <li><a href="#">Tuyển Dụng</a></li>
+                        </ul>
+                    </aside>
+                    <aside class="col-md col-6">
+                        <h6 class="title">Cộng Đồng Phong Vũ</h6>
+                        <ul class="list-unstyled">
+                            <li> <a href="#"> <i class="fab fa-facebook"></i>Phong Vũ Việt Nam </a></li>
+                            <li> <a href="#"> <i class="fab fa-youtube"></i> Phong Vũ Media </a></li>
+                            <li> <a href="#"> Phong Vũ Hội </a></li>
+                            <li> <a href="#"> Gọi Mua Hàng: 1800 6867 </a></li>
+                            <li><a href="#">Gọi Chăm Sóc: 1800 6865</a></li>
+                        </ul>
+                    </aside>
+                    <aside class="col-md">
+                        <h6 class="title">Email Liên Hệ</h6>
+                        <ul class="list-unstyled">
+                            <li><a href="#"> Hỗ Trợ Khách Hàng: cskh@phongvu.vn </a></li>
+                            <li><a href="#"> Liên Hệ Báo Giá: baogia@phongvu.vn</a></li>
+                            <li><a href="#"> Hợp Tác Phát Triển: hoptac@phongvu.vn </a></li>
+                        </ul>
+                    </aside>
+                </div> <!-- row.// -->
+            </section>	<!-- footer-top.// -->
+
+            <section class="footer-bottom text-center">
+
+                <p class="text-white">Privacy Policy - Terms of Use - User Information Legal Enquiry Guide</p>
+                <p class="text-muted"> &copy 2019 Company name, All rights reserved </p>
+                <br>
+            </section>
+        </div><!-- //container -->
+    </footer>
+    <!-- ========================= FOOTER END // ========================= -->
+
+
+
+    <script src="~/Scripts/ckeditor/ckeditor.js"></script>
+    
+
+
+</body>
+</html>
